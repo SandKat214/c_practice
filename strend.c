@@ -3,24 +3,30 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define STR_SIZE 20
+
 int strend(char *, char *);
 
 int main()
 {
-    char *s1 = calloc(20, sizeof (*s1));
-    char *s2 = calloc(20, sizeof (*s2));
+    char *s1 = (char *) calloc(STR_SIZE, sizeof (*s1));
+    char *s2 = (char *) calloc(STR_SIZE, sizeof (*s2));
+    if (s1 == NULL || s2 == NULL) {
+        printf("Memory could not be allocated for array.\n");
+        return -1;
+    }
 
     printf("Enter the first string: ");
-    scanf("%s", s1);
+    fgets(s1, STR_SIZE, stdin);
     printf("Enter the second string: ");
-    scanf("%s", s2);
+    fgets(s2, STR_SIZE, stdin);
 
     bool result = strend(s1, s2);
     printf("It is %s that the second string occurs at the end of the first string.\n", result ? "true" : "false");
 
     free(s1);
     free(s2);
-    
+
     return 0;
 }
 
